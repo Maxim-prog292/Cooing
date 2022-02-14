@@ -15,10 +15,15 @@
     outline: none;
 }
 .post-list-item .btn-star {
-    color: #FFD700;
+    color: #777777;
+    background: #d1d1d1;
 }
 .post-list-item .btn-trash {
-    color: red;
+  color: #777777;
+    background: #d1d1d1;
+}
+.post-list-item .btn-trash:hover {
+  color: #ff0000;
 }
 .post-list-item .fa-heart {
     width: 20px;
@@ -40,15 +45,15 @@
   transition: 0.5s all;
 }
 
-.post-list-item .like .fa-heart {
+.like .fa-heart {
     opacity: 1;
-    transform: translateX(0px);
+    transform: translateX(10px);
 }
 
-.post-list-item .important .post-list-item-label {
-  color: #FFD700;
+.important .post-label {
+  text-decoration: underline;
 }
 
-.post-list-item .important .btn-star {
-    color: #aeaeae;
+.important .btn-star {
+    color: #ffee00;
 }

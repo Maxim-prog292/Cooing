@@ -7,6 +7,25 @@ import PostAddForm from "../postAddForm";
 import './App.css'
 
 export default function App() {
+
+  const data = [
+    {label: 'Вышел на прогулку',
+     important: false,
+     id: 'e34r'},
+    {label: 'Выпил кофе с другом',
+     important: true,
+     id: 'ergrweq'},
+    {label: 'Пришел домой и стал учить React',
+     important: true,
+     id: 'gfe53err'},
+     {label: 'Немного отдохнул',
+     important: false,
+     id: 't4gerr'},
+     {label: 'И продолжил',
+     important: true,
+     id: 'fnregtyu'}
+  ]
+
   return (
       <div className="app">
           <AppHeader />
@@ -14,7 +33,7 @@ export default function App() {
             <SearchPanel />
             <PostStatusFilter />
           </div>
-          <PostList />
+          <PostList data={data}/>
           <PostAddForm />
       </div>
     
