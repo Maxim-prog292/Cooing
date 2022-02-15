@@ -1,10 +1,12 @@
 import React from 'react'
+import { Button } from 'reactstrap'
+
 
 export default function PostStatusFilter() {
   return (
     <div className='btn-group'>
-        <button className='btn btn-info'>Все</button>
-        <button className='btn btn-outline-secondary'>Понравились</button>
+        <Button color='info' outline >Все</Button>
+        <Button color='secondary' outline>Понравились</Button>
     </div>
   )
 }

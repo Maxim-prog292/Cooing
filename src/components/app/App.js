@@ -4,7 +4,13 @@ import SearchPanel from "../searchPanel";
 import PostStatusFilter from "../postStatusFilter";
 import PostList from "../postList";
 import PostAddForm from "../postAddForm";
-import './App.css'
+import styled from "styled-components";
+
+const AppBlock = styled.div`
+  margin: 0 auto;
+  width: 1000px;
+`;
+
 
 export default function App() {
 
@@ -23,11 +29,11 @@ export default function App() {
      id: 't4gerr'},
      {label: 'И продолжил',
      important: true,
-     id: 'fnregtyu'}
+     id: 'fnregtyu'},
   ]
 
   return (
-      <div className="app">
+      <AppBlock className="app">
           <AppHeader />
           <div className="search-panel d-flex">
             <SearchPanel />
@@ -35,7 +41,7 @@ export default function App() {
           </div>
           <PostList data={data}/>
           <PostAddForm />
-      </div>
+      </AppBlock>
     
   )
 }

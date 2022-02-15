@@ -1,4 +1,5 @@
 import React from 'react'
+import { Button } from 'reactstrap';
 import  {FontAwesomeIcon}  from '@fortawesome/react-fontawesome'
 import { faStar, faTrashAlt, faHeart } from '@fortawesome/free-solid-svg-icons';
 import './PostListItem.css'
@@ -51,18 +52,22 @@ export default class PostListItem extends React.Component {
 				{this.props.label}
 			</span>
 			<div className='d-flex justify-content-center align-items-center '>
-				<button
+				<Button
+				color='warning'
+				outline
 				type='button' 
 				className='btn-star btn-sm'
 				onClick={this.itsImportant}>
 					<FontAwesomeIcon icon={faStar} />
-				</button>
-				<button
+				</Button>
+				<Button
+				color='danger'
+				outline
 				type='button' 
 				className='btn-trash btn-sm'
 				onClick={this.itsDelelte}>
 					<FontAwesomeIcon icon={faTrashAlt} />
-				</button>
+				</Button>
 				<FontAwesomeIcon className='fa-heart' icon={faHeart} />
 			</div>
 		</div>

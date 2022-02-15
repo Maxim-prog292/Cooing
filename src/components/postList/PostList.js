@@ -1,4 +1,5 @@
 import React from 'react'
+import { ListGroup } from 'reactstrap';
 import PostListItem from '../postListItem'
 import './PostList.css'
 
@@ -16,9 +17,8 @@ export default function PostList({data}) {
 
   return (
     
-    <ul className='app-list list-group'>
+    <ListGroup className='app-list '>
         {postListArray}
-
-    </ul>
+    </ListGroup>
   )
 }
