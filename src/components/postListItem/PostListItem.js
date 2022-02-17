@@ -14,7 +14,6 @@ export default class PostListItem extends React.Component {
 			liked: false
 		}
 		this.itsImportant = this.itsImportant.bind(this);
-		this.itsDelelte = this.itsDelelte.bind(this);
 		this.itsLike = this.itsLike.bind(this);
 	}
 	
@@ -23,10 +22,6 @@ export default class PostListItem extends React.Component {
 		this.setState(({important}) => ({
 			important: !important
 		}))
-	}
-	itsDelelte(e) {
-		const t = e.target;
-		t.parentNode.parentNode.parentNode.remove();
 	}
 	itsLike(e) {
 		const t = e.target;
@@ -65,7 +60,7 @@ export default class PostListItem extends React.Component {
 				outline
 				type='button' 
 				className='btn-trash btn-sm'
-				onClick={this.itsDelelte}>
+				onClick={this.props.onDelete}>
 					<FontAwesomeIcon icon={faTrashAlt} />
 				</Button>
 				<FontAwesomeIcon className='fa-heart' icon={faHeart} />

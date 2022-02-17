@@ -12,36 +12,78 @@ const AppBlock = styled.div`
 `;
 
 
-export default function App() {
+export default class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.props = props;
+    this.state = {
+      data: [
+        {label: 'Вышел на прогулку',
+         important: false,
+         id: 1},
+        {label: 'Выпил кофе с другом',
+         important: false,
+         id: 2},
+        {label: 'Пришел домой и стал учить React',
+         important: false,
+         id: 3},
+         {label: 'Немного отдохнул',
+         important: false,
+         id: 4},
+         {label: 'И продолжил',
+         important: false,
+         id: 5},
+      ]
+    };
+    this.deleteItem = this.deleteItem.bind(this);
+    this.addPost = this.addPost.bind(this);
+    this.id = 5;
+  }
+  deleteItem(id) {
+    this.setState(({data}) => {
+      const index = data.findIndex( item => item.id === id);
 
-  const data = [
-    {label: 'Вышел на прогулку',
-     important: false,
-     id: 'e34r'},
-    {label: 'Выпил кофе с другом',
-     important: true,
-     id: 'ergrweq'},
-    {label: 'Пришел домой и стал учить React',
-     important: true,
-     id: 'gfe53err'},
-     {label: 'Немного отдохнул',
-     important: false,
-     id: 't4gerr'},
-     {label: 'И продолжил',
-     important: true,
-     id: 'fnregtyu'},
-  ]
+      const newArray = [...data.slice(0, index), ...data.slice(index + 1)];
 
-  return (
+      return (
+        {data: newArray}
+        )
+    })
+  }
+  addPost(label) {
+    const newPost = {
+      label: label,
+      important: false,
+      id: ++this.id
+    };
+
+    this.setState(({ data }) => {
+      const newArray = [...data, newPost];
+      return (
+        {data: newArray}
+      )
+    })
+  }
+
+  
+  render() { 
+    return (
       <AppBlock className="app">
           <AppHeader />
           <div className="search-panel d-flex">
             <SearchPanel />
             <PostStatusFilter />
           </div>
-          <PostList data={data}/>
-          <PostAddForm />
+          <PostList 
+            data={this.state.data}
+            onDelete={ this.deleteItem }
+            />
+          <PostAddForm
+            onAddPost={ this.addPost } 
+            />
       </AppBlock>
     
   )
+  }
+  
 }

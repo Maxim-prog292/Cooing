@@ -2,9 +2,9 @@ import React from 'react'
 import { Input, Button } from 'reactstrap'
 import './PostAddForm.css'
 
-export default function PostAddForm() {
+export default function PostAddForm({ onAddPost }) {
   return (
-    <form className='post-add-form d-flex justify-content-between'>
+    <div className='post-add-form d-flex justify-content-between'>
         <Input
             bsSize='lg'
             className='post-add-form-input'
@@ -16,7 +16,8 @@ export default function PostAddForm() {
             outline
             type='submit'
             className='btn'
+            onClick={ () => onAddPost('label')}
         >Добавить</Button>
-    </form>  
+    </div>  
   )
 }
