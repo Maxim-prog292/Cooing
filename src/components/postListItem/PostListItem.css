@@ -47,13 +47,16 @@
 
 .like .fa-heart {
     opacity: 1;
-    transform: translateX(10px);
+    transform: translateX(8px);
 }
 
 .important .post-label {
   text-decoration: underline;
+  
 }
-
+.post-label {
+  cursor: pointer;
+}
 .important .btn-star {
     color: #ffee00;
 }

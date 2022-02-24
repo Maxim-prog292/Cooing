@@ -20,23 +20,32 @@ export default class App extends React.Component {
       data: [
         {label: 'Вышел на прогулку',
          important: false,
+         like: false,
          id: 1},
         {label: 'Выпил кофе с другом',
          important: false,
+         like: false,
          id: 2},
         {label: 'Пришел домой и стал учить React',
          important: false,
+         like: false,
          id: 3},
          {label: 'Немного отдохнул',
          important: false,
+         like: false,
          id: 4},
          {label: 'И продолжил',
          important: false,
+         like: false,
          id: 5},
-      ]
+      ],
+      term: ''
     };
     this.deleteItem = this.deleteItem.bind(this);
     this.addPost = this.addPost.bind(this);
+    this.onToggleImportant = this.onToggleImportant.bind(this);
+    this.onToggleLiked = this.onToggleLiked.bind(this);
+    this.onUpdateSearch = this.onUpdateSearch.bind(this);
     this.id = 5;
   }
   deleteItem(id) {
@@ -51,6 +60,7 @@ export default class App extends React.Component {
     })
   }
   addPost(label) {
+    
     const newPost = {
       label: label,
       important: false,
@@ -64,19 +74,69 @@ export default class App extends React.Component {
       )
     })
   }
+  onToggleImportant(id) {
+    this.setState(({data}) => {
+      const index = data.findIndex( item => item.id === id);
+
+      const oldItem = data[index];
+      const newItem = {...oldItem, important: !oldItem.important};
+
+      const newArray = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
+      
+      return (
+        {data: newArray}
+      )
+    })
+  }
+  onToggleLiked(id) {
+    this.setState(({data}) => {
+      const index = data.findIndex( item => item.id === id);
+
+      const oldItem = data[index];
+      const newItem = {...oldItem, like: !oldItem.like};
+
+      const newArray = [...data.slice(0, index), newItem, ...data.slice(index + 1)];
+      
+      return (
+        {data: newArray}
+      )
+    })
+  }
+  searchPost(item, term) {
+    if (term.length === 0) {
+      return item;
+    }
+
+    return item.filter(item => {
+      return item.label.indexOf(term) > -1;
+    })
+  }
+  onUpdateSearch(term){
+    this.setState({term})
+  }
 
   
   render() { 
+    const {data, term} = this.state;
+    const visiblePost = this.searchPost(data, term);
+    const liked = data.filter(item => item.like).length;
+    const allPost = data.length; 
+
     return (
       <AppBlock className="app">
-          <AppHeader />
+          <AppHeader 
+            liked={liked}
+            allPost={allPost}
+          />
           <div className="search-panel d-flex">
-            <SearchPanel />
+            <SearchPanel onUpdateSearch={this.onUpdateSearch}/>
             <PostStatusFilter />
           </div>
           <PostList 
-            data={this.state.data}
+            data={visiblePost}
             onDelete={ this.deleteItem }
+            onToggleImportant={this.onToggleImportant}
+            onToggleLiked={this.onToggleLiked}
             />
           <PostAddForm
             onAddPost={ this.addPost } 

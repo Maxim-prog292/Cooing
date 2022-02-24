@@ -16,11 +16,11 @@ const Header = styled.div`
 `;
 
 
-export default function AppHeader() {
+export default function AppHeader({liked, allPost}) {
   return (
     <Header>
         <h1>Maksim Magomedov</h1>
-        <h2>5 записей | понравилось 0</h2>
+        <h2>{allPost} записей | понравилось {liked}</h2>
     </Header>
   )
 }

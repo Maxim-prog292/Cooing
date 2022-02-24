@@ -6,64 +6,51 @@ import './PostListItem.css'
 
 
 export default class PostListItem extends React.Component {
-	constructor(props) {
-		super(props);
-		this.props = props;
-		this.state = {
-			important: false,
-			liked: false
-		}
-		this.itsImportant = this.itsImportant.bind(this);
-		this.itsLike = this.itsLike.bind(this);
-	}
-	
-
-	itsImportant(){
-		this.setState(({important}) => ({
-			important: !important
-		}))
-	}
-	itsLike(e) {
-		const t = e.target;
-		if (t.classList.contains('post-list-item')) {
-			this.setState(({liked}) => ({
-				liked: !liked
-			}))
-		}
-	}
 
     render() {
-	let classNames = 'post-list-item d-flex justify-content-between';
+	let classNames = 'post-list-item d-flex justify-content-between ';
+	
+	const { label, onDelete, onToggleLiked, onToggleImportant, important, like } = this.props;
 
-	if (this.state.important) {
+	if (important) {
 		classNames += ' important'
 	}
-	if (this.state.liked) {
+	if (like) {
 		classNames += ' like'
 	}
 	return (
-		<div className={classNames} onClick={this.itsLike}>
-			<span className='post-label'>
-				{this.props.label}
+		<div 
+		className={classNames}>
+			<span 
+				className='post-label'
+				onClick={onToggleLiked}
+				title='Лайкнуть'>
+				{label}
 			</span>
 			<div className='d-flex justify-content-center align-items-center '>
 				<Button
-				color='warning'
-				outline
-				type='button' 
-				className='btn-star btn-sm'
-				onClick={this.itsImportant}>
+					color='warning'
+					outline
+					type='button' 
+					className='btn-star btn-sm'
+					onClick={onToggleImportant}>
 					<FontAwesomeIcon icon={faStar} />
 				</Button>
+
 				<Button
-				color='danger'
-				outline
-				type='button' 
-				className='btn-trash btn-sm'
-				onClick={this.props.onDelete}>
+					color='danger'
+					outline
+					type='button' 
+					className='btn-trash btn-sm'
+					onClick={onDelete}>
 					<FontAwesomeIcon icon={faTrashAlt} />
 				</Button>
-				<FontAwesomeIcon className='fa-heart' icon={faHeart} />
+
+				<FontAwesomeIcon 
+				className='fa-heart' 
+				icon={faHeart} 
+
+				/>
 			</div>
 		</div>
 	)
