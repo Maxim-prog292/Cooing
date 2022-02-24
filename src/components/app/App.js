@@ -39,13 +39,15 @@ export default class App extends React.Component {
          like: false,
          id: 5},
       ],
-      term: ''
+      term: '',
+      filter: 'all'
     };
     this.deleteItem = this.deleteItem.bind(this);
     this.addPost = this.addPost.bind(this);
     this.onToggleImportant = this.onToggleImportant.bind(this);
     this.onToggleLiked = this.onToggleLiked.bind(this);
     this.onUpdateSearch = this.onUpdateSearch.bind(this);
+    this.onFilterSelect = this.onFilterSelect.bind(this);
     this.id = 5;
   }
   deleteItem(id) {
@@ -114,11 +116,23 @@ export default class App extends React.Component {
   onUpdateSearch(term){
     this.setState({term})
   }
-
+  filterPost(items, filter) {
+    if (filter === 'like') {
+      return items.filter(item => item.like)
+    } else {
+      return items
+    }
+  }
+  onFilterSelect(filter){
+    
+    this.setState({filter: filter})
+  }
   
   render() { 
-    const {data, term} = this.state;
-    const visiblePost = this.searchPost(data, term);
+    const {data, term, filter} = this.state;
+
+    const visiblePost = this.filterPost(this.searchPost(data, term), filter);
+
     const liked = data.filter(item => item.like).length;
     const allPost = data.length; 
 
@@ -130,7 +144,10 @@ export default class App extends React.Component {
           />
           <div className="search-panel d-flex">
             <SearchPanel onUpdateSearch={this.onUpdateSearch}/>
-            <PostStatusFilter />
+            <PostStatusFilter 
+              filter={filter}
+              onFilterSelect={this.onFilterSelect}
+            />
           </div>
           <PostList 
             data={visiblePost}
